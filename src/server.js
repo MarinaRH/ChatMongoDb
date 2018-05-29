@@ -7,6 +7,15 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio.listen(server);
 
+const mongoose= require('mongoose');
+
+
+//  db connection
+mongoose.connect('mongodb://localhost/chat-database')
+ .then(db => console.log('db is connected'))
+ .catch(err => console.log(err));
+
+
 // setting
 app.set('port',process.env.PORT || 3000)
 require('./sockets')(io);
